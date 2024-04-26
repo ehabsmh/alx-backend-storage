@@ -64,3 +64,17 @@ Context: Updating multiple tables for one action from your application can gener
 Write a SQL script that creates a trigger that resets the attribute valid_email only when the email has been changed.
 
 Context: Nothing related to MySQL, but perfect for user email validation - distribute the logic to the database itself!
+
+---
+
+### [6. Add bonus](https://github.com/ehabsmh/alx-backend-storage/0x00-MySQL_Advanced/6-bonus.sql)
+Write a SQL script that creates a stored procedure AddBonus that adds a new correction for a student.
+
+Requirements:
+
+- Procedure AddBonus is taking 3 inputs (in this order):
+    - user_id, a users.id value (you can assume user_id is linked to an existing users).
+    - project_name, a new or already exists projects - if no projects.name found in the table, you should create it.
+    - score, the score value for the correction.
+
+Context: Write code in SQL is a nice level up!
