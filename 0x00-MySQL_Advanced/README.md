@@ -10,13 +10,9 @@ With these attributes:
 - Your script can be executed on any database.
 
 Context: Make an attribute unique directly in the table schema will enforced your business rules and avoid bugs in your application.
-<<<<<<< HEAD
 
 ---
 
-=======
----
->>>>>>> 982c3e09d84c4d455fbf13e3bf83ed2a5020cb8c
 ### [1. In and not out](https://github.com/ehabsmh/alx-backend-storage/0x00-MySQL_Advanced/1-country_users.sql)
 Write a SQL script that creates a table users following these requirements:
 
@@ -52,20 +48,15 @@ Requirements:
 - Column names must be: band_name and lifespan (in years until 2022 - please use 2022 instead of YEAR(CURDATE())).
 - You should use attributes formed and split for computing the lifespan.
 - Your script can be executed on any database.
-<<<<<<< HEAD
 
 ---
 
-=======
----
->>>>>>> 982c3e09d84c4d455fbf13e3bf83ed2a5020cb8c
 ### [4. Buy buy buy](https://github.com/ehabsmh/alx-backend-storage/0x00-MySQL_Advanced/4-store.sql)
 Write a SQL script that creates a trigger that decreases the quantity of an item after adding a new order.
 
 Quantity in the table items can be negative.
 
 Context: Updating multiple tables for one action from your application can generate issue: network disconnection, crash, etc… to keep your data in a good shape, let MySQL do it for you!
-<<<<<<< HEAD
 
 ---
 
@@ -73,5 +64,3 @@ Context: Updating multiple tables for one action from your application can gener
 Write a SQL script that creates a trigger that resets the attribute valid_email only when the email has been changed.
 
 Context: Nothing related to MySQL, but perfect for user email validation - distribute the logic to the database itself!
-=======
->>>>>>> 982c3e09d84c4d455fbf13e3bf83ed2a5020cb8c
