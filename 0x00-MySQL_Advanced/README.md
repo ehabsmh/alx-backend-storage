@@ -125,3 +125,15 @@ Requirements:
     - a, INT
     - b, INT
 - And returns a / b or 0 if b == 0
+
+---
+
+### [11. No table for a meeting](https://github.com/ehabsmh/alx-backend-storage/0x00-MySQL_Advanced/11-need_meeting.sql)
+
+Write a SQL script that creates a view need_meeting that lists all students that have a score under 80 (strict) and no last_meeting or more than 1 month.
+
+Requirements:
+
+- The view need_meeting should return all students name when:
+    - They score are under (strict) to 80
+    - AND no last_meeting date OR more than a month
