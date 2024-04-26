@@ -137,3 +137,17 @@ Requirements:
 - The view need_meeting should return all students name when:
     - They score are under (strict) to 80
     - AND no last_meeting date OR more than a month
+
+---
+
+### [12. Average weighted score](https://github.com/ehabsmh/alx-backend-storage/0x00-MySQL_Advanced/100-average_weighted_score.sql)
+
+Write a SQL script that creates a stored procedure ComputeAverageWeightedScoreForUser that computes and store the average weighted score for a student.
+
+Requirements:
+
+- Procedure ComputeAverageScoreForUser is taking 1 input:
+    - user_id, a users.id value (you can assume user_id is linked to an existing users)
+
+**Tips:**
+[Calculate-Weighted-Average](https://intranet.alxswe.com/rltoken/QHx92mlF43zF6GTEil-Cyw)
