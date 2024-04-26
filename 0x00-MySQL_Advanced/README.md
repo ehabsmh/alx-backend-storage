@@ -92,7 +92,7 @@ Requirements:
 
 ---
 
-### [8. Optimize simple search](https://github.com/ehabsmh/alx-backend-storage/0x00-MySQL_Advanced/7-average_score.sql)
+### [8. Optimize simple search](https://github.com/ehabsmh/alx-backend-storage/0x00-MySQL_Advanced/8-index_my_names.sql)
 
 Write a SQL script that creates an index idx_name_first on the table names and the first letter of name.
 
@@ -102,3 +102,13 @@ Requirements:
 - Only the first letter of name must be indexed
 
 Context: Index is not the solution for any performance issue, but well used, it’s really powerful!
+
+---
+
+### [9. Optimize search and score](https://github.com/ehabsmh/alx-backend-storage/0x00-MySQL_Advanced/9-index_name_score.sql)
+Write a SQL script that creates an index idx_name_first_score on the table names and the first letter of name and the score.
+
+Requirements:
+
+- Import this table dump: [names.sql.zip](https://intranet.alxswe.com/rltoken/BluyCCIIfw0NqcjqUiUdEw)
+- Only the first letter of name AND score must be indexed
