@@ -89,3 +89,22 @@ Write a Python function that returns the list of school having a specific topic:
 Prototype: `def schools_by_topic(mongo_collection, topic):`
 `mongo_collection` will be the `pymongo` collection object
 `topic` (string) will be topic searched
+
+---
+
+### [12. Log stats](https://github.com/ehabsmh/alx-backend-storage/blob/main/0x01-NoSQL/12-log_stats.py)
+Write a Python script that provides some stats about Nginx logs stored in MongoDB:
+
+- Database: `logs`
+- Collection: `nginx`
+- Display (same as the example):
+  - first line: `x logs` where `x` is the number of documents in this collection
+  - second line: `Methods:`
+  - 5 lines with the number of documents with the `method` = `["GET", "POST", "PUT", "PATCH", "DELETE"]` in this order (see example below - warning: it’s a tabulation before each line)
+  - one line with the number of documents with:
+    - `method=GET`
+    - `path=/status`
+
+You can use this dump as data sample: [dump.zip](https://intranet.alxswe.com/rltoken/0szbpslKvH3RqKb_2HUeoQ)
+
+The output of your script must be exactly the same as the example
