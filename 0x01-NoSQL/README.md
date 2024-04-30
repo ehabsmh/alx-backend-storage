@@ -112,3 +112,10 @@ run:
 `unzip dump.zip`
 
 The output of your script must be exactly the same as the example.
+
+---
+
+### [13. Regex filter](https://github.com/ehabsmh/alx-backend-storage/blob/main/0x01-NoSQL/100-find)
+Write a script that lists all documents with `name` starting by `Holberton` in the collection `school`:
+
+- The database name will be passed as option of `mongo` command.
