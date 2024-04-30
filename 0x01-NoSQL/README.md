@@ -105,6 +105,6 @@ Write a Python script that provides some stats about Nginx logs stored in MongoD
     - `method=GET`
     - `path=/status`
 
-You can use this dump as data sample: [dump.zip](https://intranet.alxswe.com/rltoken/0szbpslKvH3RqKb_2HUeoQ)
+You can use the dump in the current directory as data sample.
 
-The output of your script must be exactly the same as the example
+The output of your script must be exactly the same as the example.
