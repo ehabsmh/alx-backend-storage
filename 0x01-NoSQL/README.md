@@ -105,6 +105,10 @@ Write a Python script that provides some stats about Nginx logs stored in MongoD
     - `method=GET`
     - `path=/status`
 
-You can use the dump in the current directory as data sample.
+You can use the dump as data sample.
+run:
+`curl -o dump.zip -s "https://s3.amazonaws.com/intranet-projects-files/holbertonschool-webstack/411/dump.zip"`
+
+`unzip dump.zip`
 
 The output of your script must be exactly the same as the example.
