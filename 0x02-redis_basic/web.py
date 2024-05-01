@@ -1,71 +1,47 @@
 #!/usr/bin/env python3
-""" Uses the requests module to obtain the HTML content of
-    a particular URL and returns it
 """
-import requests
-import redis
+In this tasks, we will implement a get_page function
+(prototype: def get_page(url: str) -> str:).
+The core of the function is very simple.
+It uses the requests module to obtain
+the HTML content of a particular URL and returns it.
+
+Inside get_page track how many times a particular URL was
+accessed in the key "count:{url}" and cache the
+result with an expiration time of 10 seconds.
+
+Tip: Use http://slowwly.robertomurray.co.uk to
+simulate a slow response and test your caching.
+
+Bonus: implement this use case with decorators.
+"""
 from functools import wraps
-from typing import Callable
-import time
-
-r = redis.Redis()
-r.flushdb()
+import requests as req
+import redis
 
 
-def cache_count(method: Callable) -> Callable:
-    """ Cache Count Decorator """
+redis_cache = redis.Redis()
+
+
+def count_url_access(method):
+    """counts the no of times a url is accessed"""
     @wraps(method)
-    def wrapper(url: str) -> str:
-        """ Wrapper Function """
-        count_key = f"count:{url}"
-        cached_url = f"cached:{url}"
-        cached = r.get(cached_url)
+    def count(url):
+        url_key = url
+        cached_data = redis_cache.get(url_key)
+        if cached_data:
+            return cached_data.decode("utf-8")
 
-        if cached:
-            r.incr(count_key)
-            return (cached.decode('utf-8'))
-
-        content = method(url)
-        r.setex(cached_url, 10, content)
-        r.set(count_key, 1)
-        return (content)
-
-    return (wrapper)
+        count_key = 'count:{}'.format(url)
+        html = method(url)
+        redis_cache.incr(count_key)
+        redis_cache.setex(url_key, 10, html)
+        return html
+    return count
 
 
-@cache_count
+@count_url_access
 def get_page(url: str) -> str:
-    """ Get Page Function """
-    try:
-        res = requests.get(url).text
-        return (res)
-    except requests.RequestException as e:
-        return ("")
-
-
-if __name__ == "__main__":
-    url = "http://slowwly.robertomurray.co.uk"
-    get_page(url)
-    get_page(url)
-    get_page(url)
-    get_page(url)
-    get_page(url)
-    get_page(url)
-    get_page(url)
-    get_page(url)
-    get_page(url)
-    print(r.get(f"count:{url}"))
-    print(r.get(f"cached:{url}"))
-
-    time.sleep(5)
-    print("After 5")
-    print(r.get(f"count:{url}"))
-    print(r.get(f"cached:{url}"))
-    time.sleep(4)
-    print("After 9")
-    print(r.get(f"count:{url}"))
-    print(r.get(f"cached:{url}"))
-    time.sleep(1)
-    print("After 10")
-    print(r.get(f"count:{url}"))
-    print(r.get(f"cached:{url}"))
+    """requests a url and returns the HTML content"""
+    html = req.get(url)
+    return html.text
