@@ -1,53 +1,71 @@
 #!/usr/bin/env python3
-"""A module that tracks the live of caches"""
+""" Uses the requests module to obtain the HTML content of
+    a particular URL and returns it
+"""
 import requests
 import redis
 from functools import wraps
 from typing import Callable
+import time
+
+r = redis.Redis()
+r.flushdb()
 
 
-def count_access(method: Callable) -> Callable:
-    """A function that checks and update the cache time"""
+def cache_count(method: Callable) -> Callable:
+    """ Cache Count Decorator """
     @wraps(method)
-    def wrapper(*args, **kwargs) -> str:
-        """updates cache time"""
-        url: str = arg[0]
-        count_key: str = f"count:{url}"
-        cache_key: str = f"cache:{url}"
+    def wrapper(url: str) -> str:
+        """ Wrapper Function """
+        count_key = f"count:{url}"
+        cached_url = f"cached:{url}"
+        cached = r.get(cached_url)
 
-        access_count: int = redis_client.incr(count_key)
+        if cached:
+            r.incr(count_key)
+            return (cached.decode('utf-8'))
 
-        print(f"Access count for {url}: {access_count}")
-        cached_result: bytes = redis_client.get(cache_key)
-        if cached_result:
-            return cached_result.decode("utf-8")
+        content = method(url)
+        r.setex(cached_url, 10, content)
+        r.set(count_key, 1)
+        return (content)
 
-        result: str = method(*args, **kwargs)
-        redis_client.set(count_key, 0)
-        redis_client.setex(cache_key, 10, result)
-
-        return result
-    return wrapper
+    return (wrapper)
 
 
-@count_access
+@cache_count
 def get_page(url: str) -> str:
-    """ A function that send http request to the supplied url"""
-    response = requests.get(url)
-    return response.text
+    """ Get Page Function """
+    try:
+        res = requests.get(url).text
+        return (res)
+    except requests.RequestException as e:
+        return ("")
 
 
 if __name__ == "__main__":
-    redis_client: redis.Redis = redis.Redis()
-    slow_url: str = ("http://slowwly.robertomurray.co.uk"
-                     "/delay/1000/url/https://www.example.com")
-    print(get_page(slow_url))
-    print(get_page(slow_url))
+    url = "http://slowwly.robertomurray.co.uk"
+    get_page(url)
+    get_page(url)
+    get_page(url)
+    get_page(url)
+    get_page(url)
+    get_page(url)
+    get_page(url)
+    get_page(url)
+    get_page(url)
+    print(r.get(f"count:{url}"))
+    print(r.get(f"cached:{url}"))
 
-    fast_url: str = ("https://github.com/millywanderi/alx-backend-storage/"
-                     "blob/main/0x02-redis_basic/exercise.py")
-    print(get_page(fast_url))
-
-    import time
-    time.sleep(11)
-    print(get_page(slow_url))
+    time.sleep(5)
+    print("After 5")
+    print(r.get(f"count:{url}"))
+    print(r.get(f"cached:{url}"))
+    time.sleep(4)
+    print("After 9")
+    print(r.get(f"count:{url}"))
+    print(r.get(f"cached:{url}"))
+    time.sleep(1)
+    print("After 10")
+    print(r.get(f"count:{url}"))
+    print(r.get(f"cached:{url}"))
